@@ -1,0 +1,202 @@
+:root {
+    --paper-color: #f4f1ea;
+    --ink-color: #3e2723;
+    --accent-color: #a1887f;
+    --shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: 'Lora', serif;
+}
+
+/* Stile Dropdown Lingua */
+.language-selector {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.lang-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.lang-button {
+    background-color: var(--paper-color);
+    color: var(--ink-color);
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border: 1px solid var(--accent-color);
+    cursor: pointer;
+    font-family: 'Lora', serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.lang-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--paper-color);
+    min-width: 100px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--accent-color);
+    margin-top: 5px;
+}
+
+.lang-content a {
+    color: var(--ink-color);
+    padding: 10px 12px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    border-bottom: 1px solid rgba(161, 136, 127, 0.2);
+}
+
+.lang-content a:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.lang-dropdown:hover .lang-content {
+    display: block;
+}
+
+/* Resto degli stili originali */
+.flip-book {
+    box-shadow: var(--shadow);
+    visibility: hidden;
+    margin: 0;
+}
+
+.flip-book.visible {
+    visibility: visible;
+}
+
+.page {
+    background-color: var(--paper-color);
+    color: var(--ink-color);
+    border: 1px solid rgba(0,0,0,0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.page::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.page-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--accent-color);
+    padding: 15px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.page-content::-webkit-scrollbar {
+    display: none;
+}
+
+.cover {
+    background-color: #5d4037;
+    color: #d7ccc8;
+    text-align: center;
+    justify-content: center;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.divider {
+    width: 50px;
+    height: 2px;
+    background: var(--accent-color);
+    margin: 15px auto;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--ink-color);
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.menu-item {
+    margin-bottom: 15px;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.item-desc {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #5d4037;
+    margin-top: 4px;
+}
+
+.page-footer {
+    margin-top: auto;
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+    padding-top: 10px;
+}
+
+#hint {
+    position: fixed;
+    bottom: 20px;
+    color: white;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    animation: pulse 2s infinite;
+    z-index: 1;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0.3; }
+}
+
+@media (max-height: 600px) {
+    h1 { font-size: 1.4rem; }
+    h2 { font-size: 1.2rem; margin-bottom: 10px; }
+    .item-header { font-size: 0.9rem; }
+    .item-desc { font-size: 0.7rem; }
+}
