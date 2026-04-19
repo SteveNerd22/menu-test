@@ -232,21 +232,29 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const pageFlip = new St.PageFlip(document.getElementById('menuBook'), {
-                width: 350,
-                height: 550,
+            const bookElement = document.getElementById('menuBook');
+    
+            const screenHeight = window.innerHeight;
+            const bookHeight = Math.min(screenHeight * 0.8, 800);
+            const bookWidth = bookHeight * 0.7;
+
+            const pageFlip = new St.PageFlip(bookElement, {
+                width: bookWidth,
+                height: bookHeight,
                 size: "stretch",
                 minWidth: 300,
-                maxWidth: 450,
-                minHeight: 450,
-                maxHeight: 700,
+                maxWidth: 600,
+                minHeight: 400,
+                maxHeight: 900,
                 maxShadowOpacity: 0.5,
                 showCover: true,
-                mobileScrollSupport: true
+                mobileScrollSupport: true,
+                usePortrait: true,
+                startPage: 0
             });
 
             pageFlip.loadFromHTML(document.querySelectorAll('.page'));
-            document.getElementById('menuBook').classList.add('visible');
+            bookElement.classList.add('visible');
         });
     </script>
 </body>
