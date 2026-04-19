@@ -24,15 +24,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100dvh;
+            width: 100vw;
             overflow: hidden;
             font-family: 'Lora', serif;
         }
 
         .flip-book {
             box-shadow: var(--shadow);
-            background-size: cover;
             visibility: hidden;
+            margin: 0;
         }
 
         .flip-book.visible {
@@ -64,7 +65,14 @@
             display: flex;
             flex-direction: column;
             border: 1px solid var(--accent-color);
-            padding: 20px;
+            padding: 15px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+
+        .page-content::-webkit-scrollbar {
+            display: none;
         }
 
         .cover {
@@ -76,7 +84,7 @@
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             margin-bottom: 10px;
         }
 
@@ -90,25 +98,25 @@
         h2 {
             font-family: 'Playfair Display', serif;
             text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
             color: var(--ink-color);
             border-bottom: 1px solid var(--accent-color);
         }
 
         .menu-item {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .item-header {
             display: flex;
             justify-content: space-between;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .item-desc {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-style: italic;
             color: #5d4037;
             margin-top: 4px;
@@ -120,6 +128,7 @@
             font-size: 0.7rem;
             letter-spacing: 2px;
             color: var(--accent-color);
+            padding-top: 10px;
         }
 
         #hint {
@@ -136,6 +145,13 @@
             0% { opacity: 0.3; }
             50% { opacity: 0.7; }
             100% { opacity: 0.3; }
+        }
+
+        @media (max-height: 600px) {
+            h1 { font-size: 1.4rem; }
+            h2 { font-size: 1.2rem; margin-bottom: 10px; }
+            .item-header { font-size: 0.9rem; }
+            .item-desc { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -233,19 +249,36 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const bookElement = document.getElementById('menuBook');
-    
-            const screenHeight = window.innerHeight;
-            const bookHeight = Math.min(screenHeight * 0.8, 800);
-            const bookWidth = bookHeight * 0.7;
+            
+            function getDimensions() {
+                const safeMargin = 60;
+                const availableHeight = window.innerHeight - safeMargin;
+                const availableWidth = window.innerWidth - 20;
+
+                let height = Math.min(availableHeight, 750);
+                let width = height * 0.7;
+
+                if (width * 2 > availableWidth && window.innerWidth > 768) {
+                    width = (availableWidth / 2) - 10;
+                    height = width / 0.7;
+                } else if (width > availableWidth) {
+                    width = availableWidth - 10;
+                    height = width / 0.7;
+                }
+
+                return { width, height };
+            }
+
+            const dims = getDimensions();
 
             const pageFlip = new St.PageFlip(bookElement, {
-                width: bookWidth,
-                height: bookHeight,
+                width: dims.width,
+                height: dims.height,
                 size: "stretch",
-                minWidth: 300,
-                maxWidth: 600,
+                minWidth: 280,
+                maxWidth: 450,
                 minHeight: 400,
-                maxHeight: 900,
+                maxHeight: 800,
                 maxShadowOpacity: 0.5,
                 showCover: true,
                 mobileScrollSupport: true,
