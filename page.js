@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const langWrapper = document.querySelector('.dropdown');
+    const langWrapper = document.querySelector('.lang-dropdown');
     const langButton = document.getElementById('currentLang');
     const langOptions = document.querySelectorAll('#langOptions a');
     const langMenu = document.getElementById('langOptions');
@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     langButton.addEventListener('click', function(e) {
         e.stopPropagation();
         langMenu.classList.toggle('show');
+        console.log("toggle")
     });
 
     langOptions.forEach(option => {
@@ -19,12 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
             langButton.querySelector('.label').textContent = newLang;
 
             langMenu.classList.remove('show');
+            console.log("tolto")
         });
     });
 
     document.addEventListener('click', function(e) {
         if (!langWrapper.contains(e.target)) {
             langMenu.classList.remove('show');
+            console.log("tolto")
         }
     });
 });
