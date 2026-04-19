@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Titolo Pagina Menù</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --paper-color: #f4f1ea;
+            --ink-color: #3e2723;
+            --accent-color: #a1887f;
+            --shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Lora', serif;
+        }
+
+        .flip-book {
+            box-shadow: var(--shadow);
+            background-size: cover;
+            visibility: hidden;
+        }
+
+        .flip-book.visible {
+            visibility: visible;
+        }
+
+        .page {
+            padding: 40px 30px;
+            background-color: var(--paper-color);
+            color: var(--ink-color);
+            border: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .page-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--accent-color);
+            padding: 20px;
+        }
+
+        .cover {
+            background-color: #5d4037;
+            color: #d7ccc8;
+            text-align: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .divider {
+            width: 50px;
+            height: 2px;
+            background: var(--accent-color);
+            margin: 15px auto;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--ink-color);
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .menu-item {
+            margin-bottom: 20px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .item-desc {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: #5d4037;
+            margin-top: 4px;
+        }
+
+        .page-footer {
+            margin-top: auto;
+            text-align: center;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+        }
+
+        #hint {
+            position: fixed;
+            bottom: 20px;
+            color: white;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            animation: pulse 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hint">Trascina l'angolo per sfogliare →</div>
+
+    <div class="flip-book" id="menuBook">
+        <div class="page cover">
+            <div class="page-content">
+                <p style="letter-spacing: 4px;">Testa</p>
+                <div class="divider"></div>
+                <h1>TITOLO<br>SU DUE RIGHE</h1>
+                <p>Sottotitolo</p>
+                <div class="divider"></div>
+                <p style="margin-top: 40px; font-size: 0.8rem;">Descrizione</p>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="page-content">
+                <h2>Antipasti</h2>
+                <div class="menu-item">
+                    <div class="item-header"><span>Tagliere Misto</span> <span>€15</span></div>
+                    <div class="item-desc">Salumi presidio Slow Food e pecorino di grotta.</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span>Fiori di Zucca</span> <span>€10</span></div>
+                    <div class="item-desc">Pastella leggera, alici di Cetara e mozzarella.</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span>Polpette di Pane</span> <span>€9</span></div>
+                    <div class="item-desc">Ricetta della nonna in umido con pomodoro bio.</div>
+                </div>
+                <div class="page-footer">PAG. 1</div>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="page-content">
+                <h2>I Primi</h2>
+                <div class="menu-item">
+                    <div class="item-header"><span>Pici all'Aglione</span> <span>€13</span></div>
+                    <div class="item-desc">Pasta fresca fatta a mano, aglione della Val di Chiana.</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span>Gnocchi di Patate</span> <span>€14</span></div>
+                    <div class="item-desc">Con ragù bianco di cortile e timo fresco.</div>
+                </div>
+                <div class="page-footer">PAG. 2</div>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="page-content">
+                <h2>I Secondi</h2>
+                <div class="menu-item">
+                    <div class="item-header"><span>Cinghiale in Umido</span> <span>€18</span></div>
+                    <div class="item-desc">Cottura lenta 12 ore con bacche di ginepro.</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span>Grigliata Mista</span> <span>€20</span></div>
+                    <div class="item-desc">Costoine di maiale, salsiccia e tagliata.</div>
+                </div>
+                <div class="page-footer">PAG. 3</div>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="page-content">
+                <h2>Dolci</h2>
+                <div class="menu-item">
+                    <div class="item-header"><span>Cantucci e Vin Santo</span> <span>€7</span></div>
+                    <div class="item-desc">I nostri biscotti artigianali alle mandorle.</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span>Crostate</span> <span>€6</span></div>
+                    <div class="item-desc">Marmellate di nostra produzione.</div>
+                </div>
+                <div class="page-footer">PAG. 4</div>
+            </div>
+        </div>
+
+        <div class="page cover">
+            <div class="page-content">
+                <h3>A Presto!</h3>
+                <p style="font-size: 0.8rem; margin-top: 20px;">
+                    indirizzo<br>
+                    Seguici su [social vari]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageFlip = new St.PageFlip(document.getElementById('menuBook'), {
+                width: 350,
+                height: 550,
+                size: "stretch",
+                minWidth: 300,
+                maxWidth: 450,
+                minHeight: 450,
+                maxHeight: 700,
+                maxShadowOpacity: 0.5,
+                showCover: true,
+                mobileScrollSupport: true
+            });
+
+            pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+            document.getElementById('menuBook').classList.add('visible');
+        });
+    </script>
+</body>
+</html>
