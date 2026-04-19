@@ -30,6 +30,65 @@
             font-family: 'Lora', serif;
         }
 
+        /* Stile Dropdown Lingua */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-button {
+            background-color: var(--paper-color);
+            color: var(--ink-color);
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent-color);
+            cursor: pointer;
+            font-family: 'Lora', serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .lang-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--paper-color);
+            min-width: 100px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--accent-color);
+            margin-top: 5px;
+        }
+
+        .lang-content a {
+            color: var(--ink-color);
+            padding: 10px 12px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(161, 136, 127, 0.2);
+        }
+
+        .lang-content a:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .lang-dropdown:hover .lang-content {
+            display: block;
+        }
+
+        /* Resto degli stili originali */
         .flip-book {
             box-shadow: var(--shadow);
             visibility: hidden;
@@ -156,6 +215,20 @@
     </style>
 </head>
 <body>
+
+    <div class="language-selector">
+        <div class="lang-dropdown">
+            <button class="lang-button">
+                <span>🇮🇹</span> IT ▾
+            </button>
+            <div class="lang-content">
+                <a href="#"><span>🇮🇹</span> IT</a>
+                <a href="#"><span>🇬🇧</span> EN</a>
+                <a href="#"><span>🇫🇷</span> FR</a>
+                <a href="#"><span>🇩🇪</span> DE</a>
+            </div>
+        </div>
+    </div>
 
     <div id="hint">Trascina l'angolo per sfogliare →</div>
 
